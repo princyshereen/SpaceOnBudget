@@ -1,0 +1,2291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SpaceOnBudget – Budget Room Organization & Space-Saving Ideas</title>
+  <meta name="description" content="Small room? No space? Budget storage hacks that actually work. Discover smart space-saving ideas for students, coders, and home users." />
+
+  <!-- ============================================================
+       FONTS — Change these in the <link> tag if you want different fonts
+       Current: DM Serif Display (headings) + DM Sans (body)
+  ============================================================ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       CSS VARIABLES — Edit colors, spacing, radius here globally
+    ============================================================ */
+    :root {
+      --cream:        #FAF7F2;
+      --warm-white:   #FFFCF8;
+      --beige:        #F0E9DC;
+      --beige-mid:    #E4D9C8;
+      --tan:          #C9B99A;
+      --brown-light:  #A68B6A;
+      --brown:        #7A5C42;
+      --brown-dark:   #4A3728;
+      --sage:         #B5C4B1;
+      --blush:        #E8C4B0;
+      --dusty-rose:   #D4A5A0;
+      --sky:          #B8CDD6;
+      --text-dark:    #2E2118;
+      --text-mid:     #5C4535;
+      --text-soft:    #8B7160;
+      --text-muted:   #B09880;
+      --card-shadow:  0 4px 20px rgba(74, 55, 40, 0.10);
+      --card-hover:   0 12px 40px rgba(74, 55, 40, 0.18);
+      --radius-sm:    12px;
+      --radius-md:    18px;
+      --radius-lg:    28px;
+      --radius-xl:    40px;
+      --transition:   0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, sans-serif;
+    }
+
+    /* ============================================================
+       RESET & BASE
+    ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--cream);
+      color: var(--text-dark);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ============================================================
+       UTILITY CLASSES
+    ============================================================ */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--brown-light);
+      background: var(--beige);
+      padding: 6px 14px;
+      border-radius: 50px;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--brown-dark);
+      line-height: 1.2;
+      margin-bottom: 12px;
+    }
+
+    .section-desc {
+      font-size: 1rem;
+      color: var(--text-soft);
+      max-width: 520px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       FADE-IN ANIMATION (scroll-triggered via JS)
+    ============================================================ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* stagger children */
+    .stagger > * { transition-delay: calc(var(--i, 0) * 80ms); }
+
+    /* ============================================================
+       NAV
+    ============================================================ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 16px 0;
+      transition: background var(--transition), box-shadow var(--transition);
+    }
+
+    nav.scrolled {
+      background: rgba(250, 247, 242, 0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow: 0 1px 0 var(--beige-mid);
+    }
+
+    nav .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      color: var(--brown-dark);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-logo span {
+      color: var(--brown-light);
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--text-mid);
+      transition: color var(--transition);
+    }
+
+    .nav-links a:hover { color: var(--brown); }
+
+    .nav-cta {
+      background: var(--brown-dark);
+      color: var(--warm-white) !important;
+      padding: 9px 20px;
+      border-radius: 50px;
+      font-size: 0.84rem !important;
+      font-weight: 500 !important;
+      transition: background var(--transition), transform var(--transition) !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--brown) !important;
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+    }
+
+    /* ============================================================
+       HERO SECTION
+    ============================================================ */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      grid-template-columns: 1fr;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding-top: 80px;
+    }
+
+    /* ── Background gradient mesh ── */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 50%, #E8D5C0 0%, transparent 60%),
+        radial-gradient(ellipse 60% 80% at 80% 20%, #D4C5B5 0%, transparent 50%),
+        radial-gradient(ellipse 50% 60% at 60% 80%, #C9D4C6 0%, transparent 50%),
+        var(--beige);
+      z-index: 0;
+    }
+
+    /* decorative blobs */
+    .hero-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      opacity: 0.5;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .hero-blob-1 {
+      width: 400px; height: 400px;
+      background: var(--blush);
+      top: -100px; right: -80px;
+    }
+
+    .hero-blob-2 {
+      width: 300px; height: 300px;
+      background: var(--sage);
+      bottom: -60px; left: -60px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 60px 20px 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .hero-text { }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--warm-white);
+      border: 1px solid var(--beige-mid);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-mid);
+      margin-bottom: 28px;
+      animation: fadeDown 0.7s ease both;
+    }
+
+    .hero-badge .dot {
+      width: 7px; height: 7px;
+      background: var(--dusty-rose);
+      border-radius: 50%;
+      animation: pulse 2s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(0.8); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      line-height: 1.1;
+      color: var(--brown-dark);
+      margin-bottom: 20px;
+      animation: fadeUp 0.8s 0.1s ease both;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--brown-light);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--text-soft);
+      font-weight: 300;
+      line-height: 1.75;
+      max-width: 440px;
+      margin-bottom: 36px;
+      animation: fadeUp 0.8s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.8s 0.3s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--brown-dark);
+      color: var(--warm-white);
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      letter-spacing: 0.01em;
+      border: none;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+      box-shadow: 0 4px 20px rgba(74, 55, 40, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: var(--brown);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(74, 55, 40, 0.30);
+    }
+
+    .btn-primary svg { width: 16px; height: 16px; transition: transform var(--transition); }
+    .btn-primary:hover svg { transform: translateX(3px); }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--warm-white);
+      color: var(--brown-dark);
+      padding: 14px 24px;
+      border-radius: 50px;
+      font-size: 0.92rem;
+      font-weight: 500;
+      border: 1.5px solid var(--beige-mid);
+      cursor: pointer;
+      transition: border-color var(--transition), transform var(--transition), background var(--transition);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--tan);
+      background: var(--beige);
+      transform: translateY(-2px);
+    }
+
+    /* hero stats */
+    .hero-stats {
+      display: flex;
+      gap: 28px;
+      margin-top: 44px;
+      animation: fadeUp 0.8s 0.4s ease both;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--brown-dark);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .stat-divider {
+      width: 1px;
+      background: var(--beige-mid);
+      align-self: stretch;
+    }
+
+    /* hero image mosaic */
+    .hero-visual {
+      position: relative;
+      height: 520px;
+      animation: fadeUp 0.9s 0.2s ease both;
+    }
+
+    .hero-mosaic {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 12px;
+    }
+
+    /* ── Hero image placeholders — REPLACE src="" with real image URLs ── */
+    .mosaic-img {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      background: var(--beige-mid);
+      position: relative;
+    }
+
+    /* each mosaic cell has a colored gradient placeholder */
+    .mosaic-img:nth-child(1) { background: linear-gradient(135deg, #E8D0BC, #C9B99A); grid-row: span 2; }
+    .mosaic-img:nth-child(2) { background: linear-gradient(135deg, #B5C4B1, #8FA88A); }
+    .mosaic-img:nth-child(3) { background: linear-gradient(135deg, #E8C4B0, #D4A5A0); }
+
+    .mosaic-img img { position: absolute; inset: 0; }
+
+    /* floating tag on mosaic */
+    .mosaic-tag {
+      position: absolute;
+      bottom: 14px;
+      left: 14px;
+      background: rgba(255,252,248,0.92);
+      backdrop-filter: blur(8px);
+      padding: 6px 12px;
+      border-radius: 50px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--brown-dark);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+    }
+
+    .hero-float-card {
+      position: absolute;
+      bottom: -16px;
+      left: -20px;
+      background: var(--warm-white);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      box-shadow: var(--card-hover);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      animation: float 4s ease-in-out infinite;
+      z-index: 2;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .hero-float-icon {
+      width: 38px; height: 38px;
+      background: var(--beige);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .hero-float-text { font-size: 0.78rem; color: var(--text-mid); }
+    .hero-float-text strong { display: block; font-size: 0.88rem; color: var(--brown-dark); font-weight: 600; }
+
+    @media (max-width: 900px) {
+      .hero-content { grid-template-columns: 1fr; gap: 40px; }
+      .hero-visual { height: 320px; }
+    }
+
+    @media (max-width: 540px) {
+      .hero-stats { gap: 16px; }
+      .hero-visual { height: 260px; }
+    }
+
+    /* ============================================================
+       CATEGORY BADGE STRIP
+    ============================================================ */
+    .category-strip {
+      padding: 28px 0;
+      background: var(--warm-white);
+      border-top: 1px solid var(--beige-mid);
+      border-bottom: 1px solid var(--beige-mid);
+      overflow: hidden;
+    }
+
+    .strip-track {
+      display: flex;
+      gap: 12px;
+      animation: marquee 25s linear infinite;
+      width: max-content;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .strip-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      padding: 9px 18px;
+      background: var(--beige);
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-mid);
+    }
+
+    .strip-dot { color: var(--brown-light); font-size: 0.9rem; }
+
+    /* ============================================================
+       CARD GRID — REUSABLE CARD STRUCTURE
+    ============================================================ */
+
+    /*
+     * ─── HOW TO ADD NEW CARDS ──────────────────────────────────────
+     * 1. Copy a full .card block from any section
+     * 2. Paste it inside the same .cards-grid
+     * 3. Update:
+     *    - data-img="URL" on the .card element (or .card-image background-image)
+     *    - .card-tag text
+     *    - .card-title text
+     *    - .card-desc text
+     *    - .card-price text
+     *    - href="#" on the <a> tag → replace with your affiliate link
+     * ─────────────────────────────────────────────────────────────
+     */
+
+    .cards-section {
+      padding: 80px 0 60px;
+    }
+
+    .cards-section:nth-of-type(odd) {
+      background: var(--cream);
+    }
+
+    .cards-section:nth-of-type(even) {
+      background: var(--warm-white);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .section-header-left { }
+
+    .see-all {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--brown-light);
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--transition), color var(--transition);
+      white-space: nowrap;
+      align-self: flex-end;
+      padding-bottom: 2px;
+      margin-bottom: 4px;
+    }
+
+    .see-all:hover {
+      color: var(--brown);
+      border-color: var(--brown);
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--warm-white);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--card-shadow);
+      transition: transform var(--transition), box-shadow var(--transition);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid rgba(201, 185, 154, 0.20);
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--card-hover);
+    }
+
+    /* ── CARD IMAGE ──
+       To change image: set style="background-image: url('YOUR_IMAGE_URL')"
+       on the .card-image div, or set data-img attribute and let JS handle it.
+    ── */
+    .card-image {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    /* Colored placeholder gradients per category */
+    .card-image.clr-room     { background-color: #E2D4C5; }
+    .card-image.clr-desk     { background-color: #C5CED4; }
+    .card-image.clr-kitchen  { background-color: #D4C5C0; }
+    .card-image.clr-diy      { background-color: #C5D0C5; }
+
+    .card-image img {
+      position: absolute;
+      inset: 0;
+      transition: transform 0.5s ease;
+    }
+
+    .card:hover .card-image img { transform: scale(1.05); }
+
+    .card-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: rgba(255,252,248,0.90);
+      backdrop-filter: blur(6px);
+      padding: 4px 10px;
+      border-radius: 50px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--brown-dark);
+    }
+
+    .card-save {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 32px; height: 32px;
+      background: rgba(255,252,248,0.90);
+      backdrop-filter: blur(6px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background var(--transition), transform var(--transition);
+      border: none;
+    }
+
+    .card-save:hover {
+      background: var(--blush);
+      transform: scale(1.1);
+    }
+
+    .card-body {
+      padding: 18px 18px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      color: var(--brown-dark);
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--text-soft);
+      line-height: 1.55;
+      font-weight: 300;
+      flex: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 12px;
+      gap: 8px;
+    }
+
+    .card-price {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--brown);
+    }
+
+    /* ── AFFILIATE BUTTON ──
+       Replace href="#" with your actual affiliate link
+    ── */
+    .card-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: var(--brown-dark);
+      color: var(--warm-white);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      transition: background var(--transition), transform var(--transition);
+      white-space: nowrap;
+    }
+
+    .card-btn:hover {
+      background: var(--brown);
+      transform: translateY(-1px);
+    }
+
+    /* ─── SECTION ACCENT ─── */
+    .section-accent-bar {
+      height: 3px;
+      width: 48px;
+      border-radius: 2px;
+      margin-top: 8px;
+      margin-bottom: 16px;
+    }
+
+    .accent-rose  { background: var(--dusty-rose); }
+    .accent-sky   { background: var(--sky); }
+    .accent-sage  { background: var(--sage); }
+    .accent-tan   { background: var(--tan); }
+
+    /* ============================================================
+       TRENDING / FEATURED SECTION
+    ============================================================ */
+    .trending-section {
+      padding: 80px 0;
+      background: var(--brown-dark);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .trending-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 50% 80% at 10% 50%, rgba(166,139,106,0.3) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 60% at 90% 30%, rgba(181,196,177,0.2) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .trending-section .section-label {
+      background: rgba(255,255,255,0.1);
+      color: var(--tan);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .trending-section .section-title { color: var(--warm-white); }
+    .trending-section .section-desc  { color: rgba(255,252,248,0.65); }
+
+    .trending-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .trending-card {
+      background: rgba(255,252,248,0.06);
+      border: 1px solid rgba(255,252,248,0.10);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: transform var(--transition), background var(--transition);
+      cursor: pointer;
+    }
+
+    .trending-card:hover {
+      transform: translateY(-4px);
+      background: rgba(255,252,248,0.10);
+    }
+
+    .trending-card.featured {
+      grid-row: span 2;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .trending-card-img {
+      aspect-ratio: 4/3;
+      background: rgba(255,252,248,0.08);
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .trending-card.featured .trending-card-img {
+      aspect-ratio: 3/4;
+      flex: 1;
+    }
+
+    .trending-img-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.5rem;
+      opacity: 0.4;
+    }
+
+    .trending-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--dusty-rose);
+      color: var(--warm-white);
+      padding: 4px 10px;
+      border-radius: 50px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .trending-card-body {
+      padding: 16px 18px 18px;
+    }
+
+    .trending-card-title {
+      font-family: var(--font-display);
+      font-size: 0.98rem;
+      color: var(--warm-white);
+      line-height: 1.35;
+      margin-bottom: 6px;
+    }
+
+    .trending-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 12px;
+      gap: 8px;
+    }
+
+    .trending-saves {
+      font-size: 0.75rem;
+      color: rgba(255,252,248,0.5);
+    }
+
+    .trending-saves span {
+      color: var(--tan);
+      font-weight: 600;
+    }
+
+    .trending-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(255,252,248,0.12);
+      color: var(--warm-white);
+      padding: 7px 14px;
+      border-radius: 50px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      transition: background var(--transition);
+    }
+
+    .trending-btn:hover { background: rgba(255,252,248,0.22); }
+
+    @media (max-width: 768px) {
+      .trending-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .trending-card.featured { grid-column: span 2; grid-row: span 1; }
+      .trending-card.featured .trending-card-img { aspect-ratio: 16/9; }
+    }
+
+    @media (max-width: 480px) {
+      .trending-grid { grid-template-columns: 1fr; }
+      .trending-card.featured { grid-column: span 1; }
+    }
+
+    /* ============================================================
+       ABOUT SECTION
+    ============================================================ */
+    .about-section {
+      padding: 80px 0;
+      background: var(--beige);
+    }
+
+    .about-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .about-visual {
+      position: relative;
+    }
+
+    .about-img-main {
+      width: 100%;
+      aspect-ratio: 4/5;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, var(--beige-mid), var(--tan));
+      overflow: hidden;
+      position: relative;
+    }
+
+    .about-img-overlay {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 55%;
+      aspect-ratio: 1;
+      border-radius: var(--radius-lg);
+      background: linear-gradient(135deg, var(--sage), var(--sky));
+      overflow: hidden;
+      border: 5px solid var(--beige);
+      box-shadow: var(--card-hover);
+    }
+
+    .about-quote {
+      position: absolute;
+      top: 24px;
+      left: -24px;
+      background: var(--warm-white);
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      box-shadow: var(--card-hover);
+      max-width: 200px;
+      z-index: 2;
+      font-size: 0.78rem;
+      font-style: italic;
+      color: var(--text-mid);
+      font-family: var(--font-display);
+      line-height: 1.5;
+    }
+
+    .about-content { }
+
+    .about-content .section-title {
+      margin-bottom: 20px;
+    }
+
+    .about-text {
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      line-height: 1.8;
+      font-weight: 300;
+      margin-bottom: 16px;
+    }
+
+    .about-values {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .about-value {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .value-icon {
+      width: 38px; height: 38px;
+      background: var(--warm-white);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(74,55,40,0.08);
+    }
+
+    .value-text strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--brown-dark);
+      margin-bottom: 2px;
+    }
+
+    .value-text span {
+      font-size: 0.82rem;
+      color: var(--text-soft);
+      font-weight: 300;
+    }
+
+    @media (max-width: 768px) {
+      .about-inner { grid-template-columns: 1fr; gap: 40px; }
+      .about-visual { max-width: 400px; margin: 0 auto; }
+    }
+
+    /* ============================================================
+       CTA / PINTEREST SECTION
+    ============================================================ */
+    .pinterest-cta {
+      padding: 80px 0;
+      background: var(--cream);
+      text-align: center;
+    }
+
+    .cta-inner {
+      background: linear-gradient(135deg, #F0E9DC 0%, #E8D5C0 40%, #D4C5B5 100%);
+      border-radius: var(--radius-xl);
+      padding: 64px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-inner::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle 300px at 80% 50%, rgba(212,165,160,0.35), transparent),
+        radial-gradient(circle 200px at 20% 80%, rgba(181,196,177,0.35), transparent);
+      pointer-events: none;
+    }
+
+    .cta-inner * { position: relative; z-index: 1; }
+
+    .cta-icon {
+      width: 56px; height: 56px;
+      background: #E60023;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      color: white;
+      font-size: 1.5rem;
+      box-shadow: 0 8px 24px rgba(230,0,35,0.3);
+    }
+
+    .cta-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      color: var(--brown-dark);
+      margin-bottom: 14px;
+    }
+
+    .cta-desc {
+      font-size: 1rem;
+      color: var(--text-soft);
+      max-width: 480px;
+      margin: 0 auto 36px;
+      font-weight: 300;
+      line-height: 1.7;
+    }
+
+    .btn-pinterest {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #E60023;
+      color: white;
+      padding: 15px 32px;
+      border-radius: 50px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+      box-shadow: 0 6px 24px rgba(230,0,35,0.30);
+    }
+
+    .btn-pinterest:hover {
+      background: #C0001E;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(230,0,35,0.40);
+    }
+
+    .cta-note {
+      margin-top: 16px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    footer {
+      background: var(--brown-dark);
+      color: rgba(255,252,248,0.7);
+      padding: 48px 0 28px;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+
+    .footer-brand .nav-logo {
+      color: var(--warm-white);
+      font-size: 1.2rem;
+      display: block;
+      margin-bottom: 12px;
+    }
+
+    .footer-brand p {
+      font-size: 0.82rem;
+      line-height: 1.65;
+      color: rgba(255,252,248,0.55);
+      font-weight: 300;
+      max-width: 240px;
+    }
+
+    .footer-socials {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .social-btn {
+      width: 34px; height: 34px;
+      background: rgba(255,252,248,0.08);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      transition: background var(--transition), transform var(--transition);
+      color: rgba(255,252,248,0.7);
+    }
+
+    .social-btn:hover {
+      background: rgba(255,252,248,0.16);
+      transform: translateY(-2px);
+      color: var(--warm-white);
+    }
+
+    .footer-col h4 {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,252,248,0.45);
+      margin-bottom: 16px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col ul a {
+      font-size: 0.84rem;
+      color: rgba(255,252,248,0.65);
+      transition: color var(--transition);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-col ul a:hover { color: var(--warm-white); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255,252,248,0.08);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-bottom p {
+      font-size: 0.78rem;
+      color: rgba(255,252,248,0.35);
+    }
+
+    .footer-bottom a {
+      color: rgba(255,252,248,0.45);
+      font-size: 0.78rem;
+      transition: color var(--transition);
+    }
+
+    .footer-bottom a:hover { color: rgba(255,252,248,0.75); }
+
+    @media (max-width: 768px) {
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: span 2; }
+    }
+
+    @media (max-width: 480px) {
+      .footer-inner { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: span 1; }
+    }
+
+    /* ============================================================
+       SCROLL TO TOP
+    ============================================================ */
+    .scroll-top {
+      position: fixed;
+      bottom: 28px;
+      right: 24px;
+      width: 42px; height: 42px;
+      background: var(--brown-dark);
+      color: var(--warm-white);
+      border: none;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 16px rgba(74,55,40,0.25);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity var(--transition), transform var(--transition);
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scroll-top.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .scroll-top:hover { transform: translateY(-3px); }
+
+    /* ============================================================
+       SECTION DIVIDER
+    ============================================================ */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--beige-mid);
+      margin: 0;
+    }
+
+    /* ============================================================
+       MOBILE TWEAKS
+    ============================================================ */
+    @media (max-width: 600px) {
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+      }
+
+      .card-body { padding: 12px 12px 14px; }
+      .card-title { font-size: 0.9rem; }
+      .card-desc { font-size: 0.76rem; }
+      .card-price { font-size: 0.8rem; }
+      .card-btn { font-size: 0.72rem; padding: 7px 12px; }
+      .section-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+      .cta-inner { padding: 44px 24px; }
+    }
+
+    @media (max-width: 380px) {
+      .cards-grid { grid-template-columns: 1fr; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVIGATION
+  ============================================================ -->
+  <nav id="mainNav">
+    <div class="container nav-inner">
+      <a href="#" class="nav-logo">Space<span>OnBudget</span></a>
+
+      <ul class="nav-links">
+        <li><a href="#small-room">Small Room</a></li>
+        <li><a href="#desk-setup">Desk Setup</a></li>
+        <li><a href="#kitchen">Kitchen</a></li>
+        <li><a href="#diy">DIY Hacks</a></li>
+        <!-- REPLACE href="#" below with your Pinterest profile URL -->
+        <li><a href="#" class="nav-cta" target="_blank" rel="noopener">Pinterest →</a></li>
+      </ul>
+
+
+    </div>
+  </nav>
+
+
+
+  <!-- ============================================================
+       HERO SECTION
+       ── TO CHANGE: update tagline, description, stats, mosaic images
+  ============================================================ -->
+  <section class="hero" id="home">
+    <div class="hero-blob hero-blob-1"></div>
+    <div class="hero-blob hero-blob-2"></div>
+
+    <div class="hero-content">
+      <div class="hero-text">
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Small room? We've got you covered ✨
+        </div>
+
+        <!-- ── CHANGE: main headline text ── -->
+        <h1 class="hero-title">
+          Organize your<br/>
+          <em>space</em> without<br/>
+          breaking the bank
+        </h1>
+
+        <!-- ── CHANGE: subtitle text ── -->
+        <p class="hero-sub">
+          Budget storage hacks, space-saving ideas, and smart organization tips that <em>actually work</em> — curated for students, coders, and home lovers.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#small-room" class="btn-primary">
+            Explore Budget Hacks
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </a>
+          <!-- REPLACE href="#" with Pinterest URL -->
+          <a href="#" class="btn-secondary" target="_blank" rel="noopener">
+            Follow on Pinterest
+          </a>
+        </div>
+
+        <div class="hero-stats">
+          <!-- ── CHANGE: update these numbers ── -->
+          <div class="stat">
+            <span class="stat-num">50+</span>
+            <span class="stat-label">Budget Ideas</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num">₹99</span>
+            <span class="stat-label">Starts From</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat">
+            <span class="stat-num">4</span>
+            <span class="stat-label">Categories</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- HERO IMAGE MOSAIC
+           Replace placeholder colors with actual images:
+           style="background-image: url('YOUR_IMAGE_URL')"
+           on each .mosaic-img div
+      -->
+      <div class="hero-visual">
+        <div class="hero-mosaic">
+          <div class="mosaic-img">
+            <!-- ── TO CHANGE: replace with your room image URL ── -->
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0.3;font-size:3rem;">🏠</div>
+            <div class="mosaic-tag">Room Inspo</div>
+          </div>
+          <div class="mosaic-img">
+            <!-- ── TO CHANGE: replace with your desk image URL ── -->
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0.3;font-size:2.5rem;">💻</div>
+            <div class="mosaic-tag">Desk Goals</div>
+          </div>
+          <div class="mosaic-img">
+            <!-- ── TO CHANGE: replace with your kitchen image URL ── -->
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0.3;font-size:2.5rem;">🍳</div>
+            <div class="mosaic-tag">Kitchen Hacks</div>
+          </div>
+        </div>
+
+        <div class="hero-float-card">
+          <div class="hero-float-icon">🎯</div>
+          <div class="hero-float-text">
+            <strong>All Under ₹500</strong>
+            Hand-picked budget finds
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       MARQUEE STRIP
+  ============================================================ -->
+  <div class="category-strip" aria-hidden="true">
+    <div class="strip-track">
+      <!-- Duplicated for infinite scroll effect -->
+      <div class="strip-item"><span class="strip-dot">✦</span> Small Room Hacks</div>
+      <div class="strip-item"><span class="strip-dot">✦</span> Under ₹500</div>
+      <div class="strip-item"><span class="strip-dot">✦</span> Desk Organization</div>
+      <div class="strip-item"><span class="strip-dot">✦</span> Kitchen Storage</div>
+      <div class="strip-item"><span class="strip-dot">✦</span> Budget DIY</div>
+      <div class="strip-item"><span class="strip-dot">✦</span> Hostel Room Ideas</div>
+      <div class="strip-item"><span class="strip-dot">✦</span> Space Saving Tips</div>
+      <div class="strip-item"><span class="strip-dot">✦</span> Smart Living</div>
+      <div class="strip-item"><span class="strip-dot">✦</span> Small Room Hacks</div>
+      <div class="strip-item"><span class="strip-dot">✦</span> Under ₹500</div>
+      <div class="strip-item"><span class="strip-dot">✦</span> Desk Organization</div>
+      <div class="strip-item"><span class="strip-dot">✦</span> Kitchen Storage</div>
+      <div class="strip-item"><span class="strip-dot">✦</span> Budget DIY</div>
+      <div class="strip-item"><span class="strip-dot">✦</span> Hostel Room Ideas</div>
+      <div class="strip-item"><span class="strip-dot">✦</span> Space Saving Tips</div>
+      <div class="strip-item"><span class="strip-dot">✦</span> Smart Living</div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       SECTION A — SMALL ROOM ORGANIZATION
+       id="small-room" is used by nav anchor links
+  ============================================================ -->
+  <section class="cards-section fade-up" id="small-room">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-header-left">
+          <span class="section-label">🏠 Small Room</span>
+          <div class="section-accent-bar accent-rose"></div>
+          <!-- ── CHANGE: section title and description ── -->
+          <h2 class="section-title">Small Room<br/>Organization</h2>
+          <p class="section-desc">Maximize every inch of your small space with these clever under-₹500 storage ideas.</p>
+        </div>
+        <!-- REPLACE href="#" with Pinterest board URL -->
+        <a href="#" class="see-all" target="_blank" rel="noopener">View all on Pinterest →</a>
+      </div>
+
+      <!--
+        ============================================================
+        CARD GRID — HOW TO ADD A NEW CARD:
+        1. Copy one entire <div class="card fade-up"> block
+        2. Paste it inside this .cards-grid
+        3. Update: card-image background, card-tag, card-title,
+           card-desc, card-price, and the href="#" affiliate link
+        ============================================================
+      -->
+      <div class="cards-grid stagger">
+
+        <!-- CARD 1 ── TO CUSTOMIZE: Change image, title, price, and affiliate link -->
+        <div class="card fade-up" style="--i:0">
+          <div class="card-image clr-room">
+            <!--
+              ── TO CHANGE IMAGE ──
+              Option A (CSS): add style="background-image: url('YOUR_URL')" to this div
+              Option B (HTML): add <img src="YOUR_URL" alt="description"> inside this div
+              ── REPLACE below emoji placeholder with actual img tag ──
+            -->
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:0.35;">📦</div>
+            <span class="card-tag">Under ₹299</span>
+            <button class="card-save" aria-label="Save">♡</button>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Under-Bed Storage Box Set</h3>
+            <p class="card-desc">Foldable fabric boxes that slide under your bed — perfect for clothes, books, or shoes in hostel rooms.</p>
+            <div class="card-footer">
+              <span class="card-price">From ₹249</span>
+              <!-- ── AFFILIATE LINK: Replace href="#" with actual product link ── -->
+              <a href="#" class="card-btn" target="_blank" rel="noopener sponsored">
+                View Product ↗
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="card fade-up" style="--i:1">
+          <div class="card-image clr-room">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:0.35;">🪝</div>
+            <span class="card-tag">Wall Hack</span>
+            <button class="card-save" aria-label="Save">♡</button>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Over-Door Hook Organizer</h3>
+            <p class="card-desc">No drilling needed. Hangs on any door — store bags, towels, accessories in dead vertical space.</p>
+            <div class="card-footer">
+              <span class="card-price">From ₹199</span>
+              <!-- ── AFFILIATE LINK ── -->
+              <a href="#" class="card-btn" target="_blank" rel="noopener sponsored">View Product ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="card fade-up" style="--i:2">
+          <div class="card-image clr-room">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:0.35;">📚</div>
+            <span class="card-tag">Shelf Hack</span>
+            <button class="card-save" aria-label="Save">♡</button>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Floating Wall Shelf 3-Piece Set</h3>
+            <p class="card-desc">Lightweight floating shelves that hold books, plants, and decor. Maximum storage, minimal wall space.</p>
+            <div class="card-footer">
+              <span class="card-price">From ₹399</span>
+              <!-- ── AFFILIATE LINK ── -->
+              <a href="#" class="card-btn" target="_blank" rel="noopener sponsored">View Product ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="card fade-up" style="--i:3">
+          <div class="card-image clr-room">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:0.35;">🧺</div>
+            <span class="card-tag">Hostel Fave</span>
+            <button class="card-save" aria-label="Save">♡</button>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Stackable Cube Storage Bins</h3>
+            <p class="card-desc">Modular cubes you can stack and rearrange. Works as shelf, wardrobe unit, or side table.</p>
+            <div class="card-footer">
+              <span class="card-price">From ₹449</span>
+              <!-- ── AFFILIATE LINK ── -->
+              <a href="#" class="card-btn" target="_blank" rel="noopener sponsored">View Product ↗</a>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /cards-grid -->
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================
+       SECTION B — DESK SETUP ORGANIZATION
+  ============================================================ -->
+  <section class="cards-section fade-up" id="desk-setup">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-header-left">
+          <span class="section-label">💻 Desk Setup</span>
+          <div class="section-accent-bar accent-sky"></div>
+          <h2 class="section-title">Desk Setup<br/>Organization</h2>
+          <p class="section-desc">Clean, minimal desk setups on a student budget. Focus better, work smarter.</p>
+        </div>
+        <!-- REPLACE href="#" with Pinterest desk board URL -->
+        <a href="#" class="see-all" target="_blank" rel="noopener">View all on Pinterest →</a>
+      </div>
+
+      <div class="cards-grid stagger">
+
+        <!-- CARD 1 ── Duplicate this block to add more desk cards -->
+        <div class="card fade-up" style="--i:0">
+          <div class="card-image clr-desk">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:0.35;">🖥️</div>
+            <span class="card-tag">Monitor Riser</span>
+            <button class="card-save" aria-label="Save">♡</button>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Bamboo Monitor Stand Riser</h3>
+            <p class="card-desc">Raise your monitor to eye level, reduce neck pain, and create extra under-desk storage for keyboard and more.</p>
+            <div class="card-footer">
+              <span class="card-price">From ₹349</span>
+              <!-- ── AFFILIATE LINK ── -->
+              <a href="#" class="card-btn" target="_blank" rel="noopener sponsored">View Product ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="card fade-up" style="--i:1">
+          <div class="card-image clr-desk">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:0.35;">🔌</div>
+            <span class="card-tag">Cable Mgmt</span>
+            <button class="card-save" aria-label="Save">♡</button>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Cable Management Box Set</h3>
+            <p class="card-desc">Hide all your chargers and cables in one clean box. Instant clean desk aesthetic. Total game changer.</p>
+            <div class="card-footer">
+              <span class="card-price">From ₹299</span>
+              <!-- ── AFFILIATE LINK ── -->
+              <a href="#" class="card-btn" target="_blank" rel="noopener sponsored">View Product ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="card fade-up" style="--i:2">
+          <div class="card-image clr-desk">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:0.35;">✏️</div>
+            <span class="card-tag">Stationery</span>
+            <button class="card-save" aria-label="Save">♡</button>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Mesh Desk Organizer Set</h3>
+            <p class="card-desc">Multi-compartment mesh organizer for pens, sticky notes, small gadgets. Keeps your desk clutter-free.</p>
+            <div class="card-footer">
+              <span class="card-price">From ₹199</span>
+              <!-- ── AFFILIATE LINK ── -->
+              <a href="#" class="card-btn" target="_blank" rel="noopener sponsored">View Product ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="card fade-up" style="--i:3">
+          <div class="card-image clr-desk">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:0.35;">🌿</div>
+            <span class="card-tag">Aesthetic</span>
+            <button class="card-save" aria-label="Save">♡</button>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Mini Cactus Pot + Sticky Pad</h3>
+            <p class="card-desc">Add a touch of green and personality to your desk. Tiny cactus with a built-in memo sticky pad holder.</p>
+            <div class="card-footer">
+              <span class="card-price">From ₹149</span>
+              <!-- ── AFFILIATE LINK ── -->
+              <a href="#" class="card-btn" target="_blank" rel="noopener sponsored">View Product ↗</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================
+       SECTION C — KITCHEN ORGANIZATION
+  ============================================================ -->
+  <section class="cards-section fade-up" id="kitchen">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-header-left">
+          <span class="section-label">🍳 Kitchen</span>
+          <div class="section-accent-bar accent-tan"></div>
+          <h2 class="section-title">Kitchen<br/>Organization</h2>
+          <p class="section-desc">Smart storage tools that tame even the most cluttered kitchen on a tight budget.</p>
+        </div>
+        <!-- REPLACE href="#" with Pinterest kitchen board URL -->
+        <a href="#" class="see-all" target="_blank" rel="noopener">View all on Pinterest →</a>
+      </div>
+
+      <div class="cards-grid stagger">
+
+        <!-- CARD 1 ── Duplicate to add more kitchen cards -->
+        <div class="card fade-up" style="--i:0">
+          <div class="card-image clr-kitchen">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:0.35;">🫙</div>
+            <span class="card-tag">Pantry Hack</span>
+            <button class="card-save" aria-label="Save">♡</button>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Airtight Jar Container Set (6pc)</h3>
+            <p class="card-desc">Stackable airtight jars to store spices, pulses, rice. Keeps your pantry uniform, minimal, and Instagram-worthy.</p>
+            <div class="card-footer">
+              <span class="card-price">From ₹399</span>
+              <!-- ── AFFILIATE LINK ── -->
+              <a href="#" class="card-btn" target="_blank" rel="noopener sponsored">View Product ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="card fade-up" style="--i:1">
+          <div class="card-image clr-kitchen">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:0.35;">🍽️</div>
+            <span class="card-tag">Counter Hack</span>
+            <button class="card-save" aria-label="Save">♡</button>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">2-Tier Dish Drying Rack</h3>
+            <p class="card-desc">Double the drying space, same counter footprint. Steel rack with removable drip tray. Easy to clean.</p>
+            <div class="card-footer">
+              <span class="card-price">From ₹349</span>
+              <!-- ── AFFILIATE LINK ── -->
+              <a href="#" class="card-btn" target="_blank" rel="noopener sponsored">View Product ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="card fade-up" style="--i:2">
+          <div class="card-image clr-kitchen">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:0.35;">🔪</div>
+            <span class="card-tag">Wall Mount</span>
+            <button class="card-save" aria-label="Save">♡</button>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Magnetic Knife & Spoon Wall Strip</h3>
+            <p class="card-desc">Mount on the wall, free up drawer space. Holds knives, spatulas, and ladles magnetically. Strong and safe.</p>
+            <div class="card-footer">
+              <span class="card-price">From ₹249</span>
+              <!-- ── AFFILIATE LINK ── -->
+              <a href="#" class="card-btn" target="_blank" rel="noopener sponsored">View Product ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="card fade-up" style="--i:3">
+          <div class="card-image clr-kitchen">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:0.35;">🗃️</div>
+            <span class="card-tag">Under-Sink</span>
+            <button class="card-save" aria-label="Save">♡</button>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Under-Sink Pull-Out Organizer</h3>
+            <p class="card-desc">Sliding two-tier organizer that transforms messy under-sink space into neat, accessible storage for cleaning supplies.</p>
+            <div class="card-footer">
+              <span class="card-price">From ₹499</span>
+              <!-- ── AFFILIATE LINK ── -->
+              <a href="#" class="card-btn" target="_blank" rel="noopener sponsored">View Product ↗</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ============================================================
+       SECTION D — BUDGET DIY HACKS
+  ============================================================ -->
+  <section class="cards-section fade-up" id="diy">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-header-left">
+          <span class="section-label">🔨 Budget DIY</span>
+          <div class="section-accent-bar accent-sage"></div>
+          <h2 class="section-title">Budget DIY<br/>Hacks</h2>
+          <p class="section-desc">Cheap, homemade solutions that look expensive. Zero tools, full transformation.</p>
+        </div>
+        <!-- REPLACE href="#" with Pinterest DIY board URL -->
+        <a href="#" class="see-all" target="_blank" rel="noopener">View all on Pinterest →</a>
+      </div>
+
+      <div class="cards-grid stagger">
+
+        <!-- CARD 1 ── Duplicate to add more DIY cards -->
+        <div class="card fade-up" style="--i:0">
+          <div class="card-image clr-diy">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:0.35;">🪣</div>
+            <span class="card-tag">₹50 Hack</span>
+            <button class="card-save" aria-label="Save">♡</button>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Tin Can Desk Organizer (DIY)</h3>
+            <p class="card-desc">Collect old tin cans, spray paint them, and glue them together. Zero cost desk organizer that looks aesthetic.</p>
+            <div class="card-footer">
+              <span class="card-price">Under ₹50</span>
+              <!-- ── AFFILIATE LINK: link to spray paint or supplies ── -->
+              <a href="#" class="card-btn" target="_blank" rel="noopener sponsored">Get Supplies ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="card fade-up" style="--i:1">
+          <div class="card-image clr-diy">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:0.35;">🧱</div>
+            <span class="card-tag">No Drill</span>
+            <button class="card-save" aria-label="Save">♡</button>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Book Crate Side Table Hack</h3>
+            <p class="card-desc">Stack two wooden crates, add a glass top — instant bedside table with built-in storage. Total cost: ~₹299.</p>
+            <div class="card-footer">
+              <span class="card-price">~₹299 Total</span>
+              <!-- ── AFFILIATE LINK ── -->
+              <a href="#" class="card-btn" target="_blank" rel="noopener sponsored">Get Crates ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="card fade-up" style="--i:2">
+          <div class="card-image clr-diy">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:0.35;">🧵</div>
+            <span class="card-tag">Washi Tape</span>
+            <button class="card-save" aria-label="Save">♡</button>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Washi Tape Wall Art Gallery</h3>
+            <p class="card-desc">Create faux picture frames on your wall using colorful washi tape. Looks premium, costs ₹99, no damage to walls.</p>
+            <div class="card-footer">
+              <span class="card-price">From ₹99</span>
+              <!-- ── AFFILIATE LINK ── -->
+              <a href="#" class="card-btn" target="_blank" rel="noopener sponsored">Buy Tape ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- CARD 4 -->
+        <div class="card fade-up" style="--i:3">
+          <div class="card-image clr-diy">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:2.5rem;opacity:0.35;">🪟</div>
+            <span class="card-tag">Room Divider</span>
+            <button class="card-save" aria-label="Save">♡</button>
+          </div>
+          <div class="card-body">
+            <h3 class="card-title">Curtain Room Divider on Budget</h3>
+            <p class="card-desc">Use tension rod + curtain panels to create a private zone in shared rooms. No drilling, fully removable, under ₹400.</p>
+            <div class="card-footer">
+              <span class="card-price">Under ₹400</span>
+              <!-- ── AFFILIATE LINK ── -->
+              <a href="#" class="card-btn" target="_blank" rel="noopener sponsored">View Product ↗</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       TRENDING / FEATURED SECTION
+  ============================================================ -->
+  <section class="trending-section fade-up" id="trending">
+    <div class="container">
+      <span class="section-label">🔥 Trending Now</span>
+      <h2 class="section-title">Most Saved Ideas</h2>
+      <p class="section-desc">The ideas our community loves most — saved hundreds of times on Pinterest this week.</p>
+
+      <div class="trending-grid">
+
+        <!-- FEATURED CARD (larger, spans 2 rows) -->
+        <div class="trending-card featured fade-up">
+          <div class="trending-card-img">
+            <!--
+              ── TO CHANGE featured image ──
+              Replace background with: style="background-image: url('YOUR_URL')"
+              or add an <img> tag inside
+            -->
+            <div class="trending-img-placeholder">🏆</div>
+            <span class="trending-badge">🔥 #1 Most Saved</span>
+          </div>
+          <div class="trending-card-body">
+            <!-- ── CHANGE: title and meta ── -->
+            <h3 class="trending-card-title">The ₹499 Room Makeover That Went Viral</h3>
+            <p style="font-size:0.8rem;color:rgba(255,252,248,0.55);font-weight:300;line-height:1.6;">Transform your entire room for under ₹500 using these 5 budget hacks. No painting, no furniture buying — just smart organizing.</p>
+            <div class="trending-card-meta">
+              <span class="trending-saves">⭐ <span>2.4k</span> saves</span>
+              <!-- ── AFFILIATE LINK ── -->
+              <a href="#" class="trending-btn" target="_blank" rel="noopener sponsored">View Hack ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- TRENDING CARD 2 -->
+        <div class="trending-card fade-up">
+          <div class="trending-card-img">
+            <div class="trending-img-placeholder">💻</div>
+            <span class="trending-badge">Trending</span>
+          </div>
+          <div class="trending-card-body">
+            <h3 class="trending-card-title">₹299 Minimal Desk Setup</h3>
+            <div class="trending-card-meta">
+              <span class="trending-saves">⭐ <span>1.1k</span> saves</span>
+              <!-- ── AFFILIATE LINK ── -->
+              <a href="#" class="trending-btn" target="_blank" rel="noopener sponsored">View ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- TRENDING CARD 3 -->
+        <div class="trending-card fade-up">
+          <div class="trending-card-img">
+            <div class="trending-img-placeholder">🍳</div>
+            <span class="trending-badge">Hot Pick</span>
+          </div>
+          <div class="trending-card-body">
+            <h3 class="trending-card-title">Kitchen in a Tiny Flat Hack</h3>
+            <div class="trending-card-meta">
+              <span class="trending-saves">⭐ <span>876</span> saves</span>
+              <!-- ── AFFILIATE LINK ── -->
+              <a href="#" class="trending-btn" target="_blank" rel="noopener sponsored">View ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- TRENDING CARD 4 -->
+        <div class="trending-card fade-up">
+          <div class="trending-card-img">
+            <div class="trending-img-placeholder">🧺</div>
+            <span class="trending-badge">Fan Fave</span>
+          </div>
+          <div class="trending-card-body">
+            <h3 class="trending-card-title">Hostel Room Glow-Up Guide</h3>
+            <div class="trending-card-meta">
+              <span class="trending-saves">⭐ <span>743</span> saves</span>
+              <!-- ── AFFILIATE LINK ── -->
+              <a href="#" class="trending-btn" target="_blank" rel="noopener sponsored">View ↗</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- TRENDING CARD 5 -->
+        <div class="trending-card fade-up">
+          <div class="trending-card-img">
+            <div class="trending-img-placeholder">🔨</div>
+            <span class="trending-badge">DIY</span>
+          </div>
+          <div class="trending-card-body">
+            <h3 class="trending-card-title">Weekend DIY: ₹100 Shelf</h3>
+            <div class="trending-card-meta">
+              <span class="trending-saves">⭐ <span>612</span> saves</span>
+              <!-- ── AFFILIATE LINK ── -->
+              <a href="#" class="trending-btn" target="_blank" rel="noopener sponsored">View ↗</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       ABOUT SECTION
+  ============================================================ -->
+  <section class="about-section fade-up" id="about">
+    <div class="container">
+      <div class="about-inner">
+
+        <!-- Visual column -->
+        <div class="about-visual fade-up">
+          <div class="about-img-main">
+            <!--
+              ── TO CHANGE about image ──
+              Add style="background-image: url('YOUR_URL')" or <img> tag
+            -->
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:5rem;opacity:0.25;">🏠</div>
+          </div>
+          <div class="about-img-overlay">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3rem;opacity:0.3;">✨</div>
+          </div>
+          <div class="about-quote">
+            "Small space, big personality — on a budget."
+          </div>
+        </div>
+
+        <!-- Content column -->
+        <div class="about-content fade-up">
+          <span class="section-label">💛 About Us</span>
+          <div class="section-accent-bar accent-tan"></div>
+          <h2 class="section-title">We Help You Live<br/><em>Smart, Not Expensive</em></h2>
+
+          <!-- ── CHANGE: brand story text below ── -->
+          <p class="about-text">
+            SpaceOnBudget started with one mission: prove that you don't need a big room or a big wallet to have a beautiful, organized space.
+          </p>
+          <p class="about-text">
+            We're a Pinterest-first brand curating the best budget storage hacks, space-saving ideas, and smart organization tips — tested for real students, coders, and home users living in small spaces across India.
+          </p>
+
+          <div class="about-values">
+            <div class="about-value">
+              <div class="value-icon">💸</div>
+              <div class="value-text">
+                <strong>Budget First</strong>
+                <span>Every idea is under ₹500. Most under ₹299.</span>
+              </div>
+            </div>
+            <div class="about-value">
+              <div class="value-icon">✅</div>
+              <div class="value-text">
+                <strong>Actually Works</strong>
+                <span>No fluff — only hacks with real results.</span>
+              </div>
+            </div>
+            <div class="about-value">
+              <div class="value-icon">🎨</div>
+              <div class="value-text">
+                <strong>Looks Good Too</strong>
+                <span>Functional AND aesthetic. You can have both.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CTA — FOLLOW ON PINTEREST
+  ============================================================ -->
+  <section class="pinterest-cta fade-up" id="follow">
+    <div class="container">
+      <div class="cta-inner">
+        <div class="cta-icon">
+          <!-- Pinterest P icon -->
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
+          </svg>
+        </div>
+
+        <!-- ── CHANGE: CTA headline ── -->
+        <h2 class="cta-title">500+ Budget Ideas<br/>Waiting for You</h2>
+        <p class="cta-desc">
+          Follow SpaceOnBudget on Pinterest for daily inspiration, new hacks, and budget finds — all curated just for small rooms and tight budgets.
+        </p>
+
+        <!-- ── AFFILIATE / PINTEREST LINK: Replace href="#" ── -->
+        <a href="#" class="btn-pinterest" target="_blank" rel="noopener">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/>
+          </svg>
+          Follow SpaceOnBudget on Pinterest
+        </a>
+
+        <p class="cta-note">Free to follow · New hacks posted weekly · No spam</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+
+        <!-- Brand column -->
+        <div class="footer-brand">
+          <span class="nav-logo">Space<span>OnBudget</span></span>
+          <p>Simple space-saving ideas · Budget room organization · Smart living. Curated for students, coders, and home lovers across India.</p>
+          <div class="footer-socials">
+            <!-- REPLACE href="#" with social URLs -->
+            <a href="#" class="social-btn" aria-label="Pinterest" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="Instagram" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+            </a>
+            <a href="#" class="social-btn" aria-label="YouTube" target="_blank" rel="noopener">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.495 6.205a3.007 3.007 0 0 0-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 0 0 .527 6.205a31.247 31.247 0 0 0-.522 5.805 31.247 31.247 0 0 0 .522 5.783 3.007 3.007 0 0 0 2.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 0 0 2.088-2.088 31.247 31.247 0 0 0 .5-5.783 31.247 31.247 0 0 0-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul>
+            <li><a href="#small-room">🏠 Small Room Hacks</a></li>
+            <li><a href="#desk-setup">💻 Desk Setup</a></li>
+            <li><a href="#kitchen">🍳 Kitchen Org</a></li>
+            <li><a href="#diy">🔨 Budget DIY</a></li>
+            <li><a href="#trending">🔥 Trending Now</a></li>
+          </ul>
+        </div>
+
+        <!-- More Links -->
+        <div class="footer-col">
+          <h4>More</h4>
+          <ul>
+            <li><a href="#about">About Us</a></li>
+            <!-- REPLACE href="#" with actual links when ready -->
+            <li><a href="#">Affiliate Disclosure</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#" target="_blank" rel="noopener">Follow on Pinterest</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <!-- ── CHANGE: update year and brand name if needed ── -->
+        <p>© 2025 SpaceOnBudget. All rights reserved.</p>
+        <p>
+          <a href="#">Affiliate Disclosure</a> ·
+          <a href="#">Privacy</a>
+        </p>
+        <p style="color:rgba(255,252,248,0.25);">Built with ♡ for small spaces</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-top" id="scrollTopBtn" aria-label="Back to top">↑</button>
+
+  <!-- ============================================================
+       JAVASCRIPT — Scroll animations, nav, mobile menu, scroll-top
+  ============================================================ -->
+  <script>
+    /* ──────────────────────────────────────────
+       NAV: add "scrolled" class on scroll
+    ────────────────────────────────────────── */
+    const nav = document.getElementById('mainNav');
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+
+      // Frosted nav
+      if (scrollY > 50) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+
+      // Scroll-to-top button
+      if (scrollY > 400) {
+        scrollTopBtn.classList.add('show');
+      } else {
+        scrollTopBtn.classList.remove('show');
+      }
+    }, { passive: true });
+
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    /* ──────────────────────────────────────────
+       MOBILE MENU — removed, no menu overlay
+    ────────────────────────────────────────── */
+
+    /* ──────────────────────────────────────────
+       INTERSECTION OBSERVER — Fade-up on scroll
+    ────────────────────────────────────────── */
+    const fadeEls = document.querySelectorAll('.fade-up');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target); // animate once
+        }
+      });
+    }, {
+      threshold: 0.08,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    fadeEls.forEach(el => observer.observe(el));
+
+    /* ──────────────────────────────────────────
+       CARD SAVE BUTTON — Toggle heart
+    ────────────────────────────────────────── */
+    document.querySelectorAll('.card-save').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const saved = btn.getAttribute('data-saved') === 'true';
+        btn.setAttribute('data-saved', !saved);
+        btn.textContent = saved ? '♡' : '♥';
+        btn.style.background = saved ? '' : 'var(--dusty-rose)';
+      });
+    });
+
+    /* ──────────────────────────────────────────
+       STAGGER: assign --i CSS custom prop to children
+    ────────────────────────────────────────── */
+    document.querySelectorAll('.stagger').forEach(grid => {
+      Array.from(grid.children).forEach((child, i) => {
+        child.style.setProperty('--i', i);
+      });
+    });
+  </script>
+
+  <!--
+  ================================================================
+  📋 HOW TO UPDATE THIS PAGE — GUIDE FOR NON-CODERS
+  ================================================================
+
+  ── 1. ADD A NEW CARD ─────────────────────────────────────────
+
+  Find the section you want to add to (e.g., #small-room, #desk-setup, #kitchen, #diy).
+  Locate the <div class="cards-grid stagger"> inside it.
+  Copy ONE full card block that looks like this:
+
+      <div class="card fade-up" style="--i:0">
+        <div class="card-image clr-room">
+          ...
+          <span class="card-tag">Tag Here</span>
+          <button class="card-save">♡</button>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title">Product Name</h3>
+          <p class="card-desc">Short description here.</p>
+          <div class="card-footer">
+            <span class="card-price">From ₹199</span>
+            <a href="#" class="card-btn" target="_blank" rel="noopener sponsored">View Product ↗</a>
+          </div>
+        </div>
+      </div>
+
+  Paste it INSIDE the .cards-grid.
+  Update --i value to the next number (e.g., if 3 cards exist, new card gets style="--i:3")
+
+  ── 2. CHANGE CARD IMAGE ──────────────────────────────────────
+
+  On the <div class="card-image clr-room"> line, add a style attribute:
+  <div class="card-image clr-room" style="background-image: url('https://your-image-url.jpg')">
+
+  The image will auto-fill and crop. Use a square or 4:3 image for best results.
+  Recommended size: 600x450px minimum.
+  Tip: Use images from Pinterest, Unsplash, or product photos.
+
+  ── 3. INSERT AFFILIATE LINK ─────────────────────────────────
+
+  Find: <a href="#" class="card-btn" ...>View Product ↗</a>
+  Replace # with your affiliate URL:
+  <a href="https://amzn.to/XXXX" class="card-btn" target="_blank" rel="noopener sponsored">View Product ↗</a>
+
+  Always keep: target="_blank" rel="noopener sponsored"
+  - target="_blank" opens in a new tab
+  - rel="sponsored" tells Google it's an affiliate link (required by Google's guidelines)
+
+  ── 4. UPDATE TRENDING SECTION ────────────────────────────────
+
+  Find the trending-card blocks in the "TRENDING / FEATURED SECTION".
+  Update .trending-card-title, the save count in <span>, and the href="#" affiliate link.
+
+  ── 5. UPDATE HERO TEXT ──────────────────────────────────────
+
+  Find <h1 class="hero-title"> — change the headline text.
+  Find <p class="hero-sub"> — change the subtitle.
+  Find .hero-stats .stat to update numbers (e.g., "50+ Budget Ideas").
+
+  ── 6. UPDATE PINTEREST LINK ─────────────────────────────────
+
+  Search for href="#" and look for target="_blank" links with Pinterest text.
+  Replace # with your actual Pinterest profile URL: https://pinterest.com/yourprofile
+
+  ── 7. UPDATE FOOTER ─────────────────────────────────────────
+
+  Find © 2025 SpaceOnBudget — update the year if needed.
+  Update social links in .footer-socials by replacing href="#" with actual URLs.
+
+  ── 8. ADD A NEW SECTION ─────────────────────────────────────
+
+  Copy an entire <section class="cards-section"> block.
+  Paste it after the last section but before the trending section.
+  Give it a new id (e.g., id="bathroom").
+  Update the section-label, section-title, section-desc, and all card content.
+
+  ── 9. COLOR CLASS REFERENCE ─────────────────────────────────
+
+  Card image color classes (for placeholder backgrounds):
+  clr-room    → warm beige (Small Room section)
+  clr-desk    → light blue-grey (Desk Setup section)
+  clr-kitchen → warm peach (Kitchen section)
+  clr-diy     → sage green (DIY section)
+  Use any of these on any card, or override with background-image.
+
+  ─────────────────────────────────────────────────────────────
+  ✅ CHECKLIST BEFORE PUBLISHING:
+  - Replace all href="#" affiliate links with actual URLs
+  - Add rel="noopener sponsored" to all affiliate links
+  - Replace placeholder images with real product/room images
+  - Update Pinterest profile URL in nav, hero, CTA, and footer
+  - Update hero stats (number of ideas, price range)
+  - Add Google Analytics or any analytics tag in <head> if needed
+  - Test on mobile (check Chrome DevTools → mobile view)
+  ─────────────────────────────────────────────────────────────
+  -->
+
+</body>
+</html>
